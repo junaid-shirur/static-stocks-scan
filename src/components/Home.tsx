@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { Spinner } from "reactstrap";
 import { getStockDetails } from "../remote";
 import Loading from "./loading";
 import gotoIcn from '../assets/goto_svg.svg'
-import { redirect, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Detail from "./Detail";
 import Variables from "./Variables";
 
+interface Props {
 
-const Home = () => {
+}
+
+const Home: React.FC<Props> = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -32,7 +34,7 @@ const Home = () => {
 
     // bootstrap
     useEffect(() => {
-        if (isShowDetailsRoute && !currStockDetails.name) {
+        if (isShowDetailsRoute && !currStockDetails?.name) {
             const currDetails = data && data.length && data.find((itm: any) => itm.id == id)
             setCurrStockDetails(currDetails)
         }
@@ -51,10 +53,10 @@ const Home = () => {
     return (
         <>
             <div className="bg-gray-200 flex items-center h-screen justify-center">
-                {isHomeRoute && <ul className="max-w-lg mx-auto divide-y divide-gray-200 rounded-sm">
+                {isHomeRoute && <ul className="max-w-lg mx-auto divide-y pl-0 divide-gray-200 rounded-sm">
                     {data && data.length !== 0 &&
                         data.map((item: any, idx: number) => (
-                            <li key={idx}>
+                            <li data-id={item.id} key={idx}>
                                 <div onClick={() => handleClick(item.id)} className="shadow-md px-4 py-2 sm:px-6 flex items-center hover:bg-violet-600 bg-white cursor-pointer">
                                     <p className="truncate font-medium text-indigo-600 mb-0 py-2 min-w-0 flex-1 sm:flex sm:items-center sm:justify-between text-blue-600">{item.name}</p>
                                     <label className={`ml-16 flex flex-shrink-0 bg-${item.color}-100 text-${item.color}-800 inline-flex rounded-full px-2 text-xs font-semibold leading-5`} >{item.tag}</label>
@@ -66,10 +68,12 @@ const Home = () => {
                 {isShowDetailsRoute && currStockDetails?.name &&
                     <Detail
                         details={currStockDetails}
+                        onBack={() => navigate('/home')}
                     />}
                 {isVariableDetailsRoute && varParams?.type &&
                     <Variables
                         varParams={varParams}
+                        onBack={() => navigate(`/details/${id}`)}
                     />}
             </div>
         </>
