@@ -1,7 +1,7 @@
 import React from "react";
 import { Spinner } from "reactstrap";
 
-const Loading = () => {
+const Loading: React.FC<any> = () => {
     return (
         <>
             <div className="bg-gray-200 py-6 gap-x-5 flex items-center h-screen justify-center">

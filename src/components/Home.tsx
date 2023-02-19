@@ -18,7 +18,7 @@ const Home: React.FC<Props> = () => {
     const [varParams, setVarParams] = useState<any>({})
     const [currStockDetails, setCurrStockDetails] = useState<any>({})
 
-    const { data, status, error } = useQuery('getDetails', { queryFn: getStockDetails })
+    const { data, status, error } = useQuery('getDetails', { queryFn: getStockDetails})
 
     const isShowDetailsRoute = location.pathname.includes('details')
     const isVariableDetailsRoute = location.pathname.includes('variables')
@@ -41,7 +41,7 @@ const Home: React.FC<Props> = () => {
 
         if (isVariableDetailsRoute && !currStockDetails.name) {
             const currDetails = data && data.length && data.find((itm: any) => itm.id == id)
-            const currentParams = currDetails?.criteria?.[criteriaIdx].variable[`${key}`]
+            const currentParams = currDetails?.criteria?.[criteriaIdx].variable[`${key}`]            
             setVarParams(currentParams)
         }
 

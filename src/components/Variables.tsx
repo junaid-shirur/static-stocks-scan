@@ -6,6 +6,11 @@ interface Props {
 }
 
 const Variables: React.FC<Props> = ({ varParams, onBack }) => {
+    const saveVar = (e: any) => {
+        if (e.key === 'Enter') {
+            console.log(e.target.value);
+        }
+    }
 
     return (
         <>
@@ -26,7 +31,7 @@ const Variables: React.FC<Props> = ({ varParams, onBack }) => {
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700">{varParams.parameter_name}</label>
                                     <div className="mt-1.5">
-                                        <input type="tel" name="param_value" id="param_value" max="99" min="1" className="block w-full rounded-md border-[0.1px] border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-2 py-3" placeholder="period value" value={varParams.default_value} />
+                                        <input type="tel" onKeyDown={saveVar} name="param_value" id="param_value" max="99" min="1" className="block w-full rounded-md border-[0.1px] border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-2 py-3" placeholder="period value" defaultValue={varParams.default_value} />
                                     </div>
                                 </div>
                             </div> :
