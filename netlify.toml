@@ -1,5 +1,10 @@
 [[redirects]]
-  from = "/"
+  from = "/api/*"
   to = "https://jsonware.com/api/v1/json/402b9d6d-9862-4c19-b336-c456999258d6"
   status = 200
   force = true
+
+[[redirects]]
+  from = “/*”
+  to = “/index.html”
+  status = 200
